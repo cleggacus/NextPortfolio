@@ -69,7 +69,7 @@ const SectionGroup: FC<SectionLayoutProps> = ({ sections, setFlip }) => {
           pageBreaks.map((val, i) => 
             <div onClick={
               () => scroll(i)
-            } className={currentPage == i ? styles.active : ""}></div>
+            } key={i} className={currentPage == i ? styles.active : ""}></div>
           )
         }
       </div>
