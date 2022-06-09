@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, useEffect, useRef, useState } from "react";
 import { SectionProps } from "./section";
-import styles from "../../styles/sectiongroup.module.scss"
+import styles from "../../styles/core/sectiongroup.module.scss"
 
 type SectionLayoutProps = {
   sections: FC<SectionProps>[];

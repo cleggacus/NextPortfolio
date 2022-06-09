@@ -1,5 +1,5 @@
 import { CSSProperties, Dispatch, FC, ReactNode, SetStateAction, useEffect, useRef } from "react"
-import styles from "../../styles/sectiongroup.module.scss";
+import styles from "../../styles/core/sectiongroup.module.scss";
 
 export type SectionProps = {
   children?: ReactNode,

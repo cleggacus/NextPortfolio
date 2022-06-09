@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react"
 
-import styles from "../../styles/section.module.scss"
+import styles from "../../styles/core/box.module.scss"
 
 type BoxProps = {
   children?: ReactNode,

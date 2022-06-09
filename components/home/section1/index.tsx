@@ -1,7 +1,7 @@
 import { FC } from "react";
-import styles from "../../styles/home.module.scss"
-import Button from "../core/button";
-import Section, { SectionProps } from "../core/section";
+import styles from "../../../styles/home/section1.module.scss"
+import Button from "../../core/button";
+import Section, { SectionProps } from "../../core/section";
 
 const Section1: FC<SectionProps> = (props) => {
   return <Section {...props} className={styles.section1}>

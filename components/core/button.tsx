@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, FC, ReactNode } from "react";
-import styles from "../../styles/button.module.scss"
+import styles from "../../styles/core/button.module.scss"
 
 type ButtonProps = {
   children?: ReactNode,

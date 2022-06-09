@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
-import styles from "../../styles/home.module.scss"
-import Box from "../core/box";
-import Section, { SectionProps } from "../core/section";
+import styles from "../../../styles/home/section2.module.scss"
+import Box from "../../core/box";
+import Section, { SectionProps } from "../../core/section";
 
 const Section2: FC<SectionProps> = (props) => {
   const b1 = useRef<HTMLDivElement>(null);
@@ -68,19 +68,20 @@ const Section2: FC<SectionProps> = (props) => {
       <div className={styles.subcontent}>
         <div ref={b1} style={{opacity: 0}}>
           <Box>
-            <h1>1</h1>
+            <h1>React</h1>
+            <p></p>
           </Box>
         </div>
 
         <div ref={b2} style={{opacity: 0}}>
           <Box>
-            <h1>2</h1>
+            <h1>Express</h1>
           </Box>
         </div>
 
         <div ref={b3} style={{opacity: 0}}>
           <Box>
-            <h1>3</h1>
+            <h1>MongoDB</h1>
           </Box>
         </div>
       </div>
@@ -88,19 +89,19 @@ const Section2: FC<SectionProps> = (props) => {
       <div className={styles.subcontent}>
         <div ref={b4} style={{opacity: 0}}>
           <Box>
-            <h1>4</h1>
+            <h1>JS / TS</h1>
           </Box>
         </div>
 
         <div ref={b5} style={{opacity: 0}}>
           <Box>
-            <h1>5</h1>
+            <h1>JAVA</h1>
           </Box>
         </div>
 
         <div ref={b6} style={{opacity: 0}}>
           <Box>
-            <h1>6</h1>
+            <h1>C++</h1>
           </Box>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
-import styles from "../../styles/home.module.scss"
-import Section, { SectionProps } from "../core/section";
+import styles from "../../../styles/home/section3.module.scss"
+import Section, { SectionProps } from "../../core/section";
 
 const Section3: FC<SectionProps> = (props) => {
   useEffect(() => {
