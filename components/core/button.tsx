@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler, ReactNode, TouchEventHandler } from "react";
+import { FC, forwardRef, MouseEventHandler, ReactNode, TouchEventHandler } from "react";
 import styles from "../../styles/core/button.module.scss"
 
 type ButtonProps = {
@@ -9,12 +9,13 @@ type ButtonProps = {
   noShadow?: boolean
 }
 
-const Button: FC<ButtonProps> = ({ children, className, onClick, onTouchStart, noShadow }) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, className, onClick, onTouchStart, noShadow }, ref) => {
   return <button 
+    ref={ref}
     onClick={onClick} 
     onTouchStart={onTouchStart}
     className={`${noShadow ? "" : styles.shadow} ${styles.container} ${className}`}
   >{children}</button>
-}
+});
 
 export default Button;
