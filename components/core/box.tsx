@@ -25,13 +25,11 @@ const Box: FC<BoxProps> = ({ children, className, onClick, onTouchStart, animate
   let y = 0;
 
   useEffect(() => {
-    if(state.onScroll)
+    if(state.onScroll && ref.current && animate) {
       state.onScroll(findPos);
-
-    if(ref.current && animate)
       ref.current.style.transform = `translate(0, 0)`;
-
-    findPos()
+      findPos()
+    }
   }, [ref.current])
 
   const findPos = () => {
