@@ -5,6 +5,7 @@ import Button from "../core/button";
 import { StoreProvider } from "../../store";
 import Canvas from "./canvas";
 import Navbar from "./navbar";
+import Head from "next/head";
 
 type LayoutProps = {
   children?: ReactNode
@@ -34,6 +35,11 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   }
 
   return <StoreProvider>
+    <Head>
+      <title>Liam Clegg</title>
+      <meta name="Description" content="Liam Clegg (Web Developer and Software Engineer) Portfolio. @cleggacus." />
+    </Head>
+
     <div className={styles.container}>
       <div className={styles.containerInner}>
         <Canvas></Canvas>
