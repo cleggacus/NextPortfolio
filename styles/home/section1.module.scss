@@ -6,11 +6,10 @@
     width: 100%;
     height: 100%;
     padding: 0 15%;
+    perspective: 100px;
+    will-change: transform, opacity;
 
     .container1 {
-      animation-name: fadeDown1;
-      animation-duration: 1s;
-
       display: flex;
       z-index: 2;
       align-items: center;
@@ -18,6 +17,9 @@
       flex: 6;
       height: 100%;
       padding: 0 3% 0 0;
+
+      animation-name: fadeDown1;
+      animation-duration: 1s;
 
       h1 {
         margin: 0 0 10px 0;
@@ -123,7 +125,7 @@
     opacity: 0;
     transform: translate(-0, -200px);
   }
-  66% {
+  80% {
     opacity: 1;
     transform: translate(-0, 0);
   }
@@ -138,7 +140,7 @@
     opacity: 0;
     transform: translate(-0, -200px);
   }
-  33% {
+  20% {
     opacity: 0;
     transform: translate(-0, -200px);
   }

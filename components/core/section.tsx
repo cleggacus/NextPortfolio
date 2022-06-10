@@ -1,4 +1,4 @@
-import { CSSProperties, Dispatch, FC, ReactNode, SetStateAction, useEffect, useRef } from "react"
+import { CSSProperties, Dispatch, FC, forwardRef, ReactNode, SetStateAction, useEffect, useImperativeHandle, useRef } from "react"
 import styles from "../../styles/core/sectiongroup.module.scss";
 
 export type SectionProps = {
@@ -9,19 +9,23 @@ export type SectionProps = {
   style?: CSSProperties
 }
 
-const Section: FC<SectionProps> = ({ setTop, children, className, style }) => {
-  const ref = useRef<HTMLDivElement>(null);
+const Section = forwardRef<HTMLDivElement, SectionProps>(({ setTop, children, className, style }, ref) => {
+  const innerRef = useRef<HTMLDivElement>(null)
+
+  useImperativeHandle(ref, () => innerRef.current as HTMLDivElement);
 
   useEffect(() => {
-    if(ref?.current) {
+    if(innerRef.current) {
       if(setTop)
-        setTop(ref.current.offsetTop)
+        setTop(innerRef.current.offsetTop)
     }
   }, [ref]);
 
-  return <div style={style} ref={ref} className={`${styles.section} ${className}`}>
+  return <div style={style} ref={innerRef} className={`${styles.section} ${className}`}>
     { children } 
   </div>
-}
+});
+
+Section.displayName = "Section";
 
 export default Section

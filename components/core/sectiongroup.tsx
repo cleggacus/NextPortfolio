@@ -74,7 +74,7 @@ const SectionGroup: FC<SectionLayoutProps> = ({ sections }) => {
       {
         sections.map((Section, i) => 
           <Section 
-            style={{zIndex: (sections.length-i)}} 
+            style={{zIndex: (i)}} 
             key={i} 
             setOnScroll={setOnScroll} 
             setTop={top => setPageBreak(i, top)}
