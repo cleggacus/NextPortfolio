@@ -38,6 +38,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
     <Head>
       <title>Liam Clegg</title>
       <meta name="Description" content="Liam Clegg (Web Developer and Software Engineer) Portfolio. @cleggacus." />
+      <meta name="google-site-verification" content="3TWlMtTbXwzc_DEwdD0GPxai7TryXaSKAyYExdqLW9M" />
     </Head>
 
     <div className={styles.container}>
