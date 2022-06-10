@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import { useEffect } from 'react'
 import SectionGroup from '../components/core/sectiongroup'
 import Section1 from '../components/home/section1'
 import Section2 from '../components/home/section2'
