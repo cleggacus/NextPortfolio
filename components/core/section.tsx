@@ -6,7 +6,6 @@ export type SectionProps = {
   className?: string,
   setTop?: (top: number) => void,
   setOnScroll: (cb: ((top: number) => void)) => void,
-  setFlip?: Dispatch<SetStateAction<number>>,
   style?: CSSProperties
 }
 

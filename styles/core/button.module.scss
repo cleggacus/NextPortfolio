@@ -5,14 +5,20 @@
   border-style: solid;
   background-color: var(--bg-2);
   border-color: var(--fg-1);
-  box-shadow: 5px 5px var(--fg-1);
   color: var(--fg-1);
   font-size: 1em;
   font-weight: bold;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.container.shadow {
+  box-shadow: 5px 5px var(--fg-1);
+}
+
 .container:hover {
-  box-shadow: 10px 10px var(--fg-1)!important;
-  background-color: var(--bg-1);
+  background-color: var(--bg-1) !important;
+}
+
+.container.shadow:hover {
+  box-shadow: 10px 10px var(--fg-1) !important;
 }

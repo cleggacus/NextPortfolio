@@ -1,21 +1,3 @@
-.flipped {
-  color: var(--bg-1)!important;
-
-  .containerInner {
-    .menuIcon {
-      border-color: var(--bg-1)!important;
-      background-color: var(--fg-2)!important;
-      box-shadow: 5px 5px var(--fg-2)!important;
-
-      svg {
-        color: var(--bg-1)!important;
-      }
-    }
-  }
-}
-
-
-
 .container {
   position: fixed;
   top: 0;
@@ -23,31 +5,22 @@
   padding: var(--layout-border-width);
   width: 100vw;
   height: 100vh;
-
-  background-size: 100% 200%;
-
-  background-image: linear-gradient(
-    0deg,
-    var(--fg-1) 0%,
-    var(--fg-1) 50%,
-    var(--bg-1) 50%,
-    var(--bg-1) 100%
-  );
+  background-color: var(--bg-1);
 
   .containerInner {
     position: relative;
     width: 100%;
     height: 100%;
+    background-color: var(--bg-2);
 
-    background-size: 100% 200%;
-
-    background-image: linear-gradient(
-      0deg,
-      var(--fg-2) 0%,
-      var(--fg-2) 50%,
-      var(--bg-2) 50%,
-      var(--bg-2) 100%
-    );
+    .fader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(180deg, var(--bg-2) 0%, var(--bg-2) 50%, #00000000 100%);
+    }
 
     >canvas {
       pointer-events: none;
@@ -119,5 +92,21 @@
     .content::-webkit-scrollbar {
       display: none;
     }
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container {
+    .containerInner {
+      .info {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 0;
   }
 }

@@ -1,50 +1,67 @@
-import { FC, ReactNode, RefObject, useEffect, useRef, useState } from "react";
+import { FC, MouseEventHandler, ReactNode, TouchEventHandler, useEffect, useState } from "react";
 import { Menu } from "@styled-icons/boxicons-regular";
 import styles from "../../styles/layout.module.scss"
 import Button from "../core/button";
-import Dots from "./dots";
+import { StoreProvider } from "../../store";
+import Canvas from "./canvas";
+import Navbar from "./navbar";
 
 type LayoutProps = {
-  children?: ReactNode,
-  flipped?: number
+  children?: ReactNode
 }
 
-const Layout: FC<LayoutProps> = ({ children, flipped }) => {
-  const getFlipped = () => {
-    if(flipped == undefined)
-      return 0;
+const Layout: FC<LayoutProps> = ({ children }) => {
+  const [isOpen, setOpen] = useState(false)
 
-    if(flipped >= 1)
-      return 1;
+  useEffect(() => {
+    window.addEventListener("click", () => {
+      setOpen(false);
+    })
 
-    if(flipped <= 0)
-      return 0;
+    window.addEventListener("touchstart", () => {
+      setOpen(false);
+    })
+  }, [])
 
-    return flipped;
+
+  const toggleMenu: MouseEventHandler = e => {
+    setOpen(!isOpen);
+    e.stopPropagation();
   }
 
-  return <div style={{ backgroundPosition: `0 ${(getFlipped())*100}%` }} className={`${styles.container} ${getFlipped() > 0.5 ? styles.flipped : ""}`}>
-    <div style={{ backgroundPosition: `0 ${(getFlipped())*100}%` }} className={styles.containerInner}>
-      <Dots></Dots>
+  const touch: TouchEventHandler = e => {
+    e.stopPropagation();
+  }
 
-      <div className={styles.info}>
-        <p>@cleggacus / made with next.js</p>
+  return <StoreProvider>
+    <div className={styles.container}>
+      <div className={styles.containerInner}>
+        <Canvas></Canvas>
+
+        <div className={styles.info}>
+          <p>@cleggacus / made with next.js</p>
+        </div>
+
+        <div className={styles.content}>
+          { children }
+        </div>
+
+        <div className={styles.fader}></div>
+
+        <div className={styles.menuTitle}>
+          <h2>WELCOME</h2>
+          <h2>FRIEND</h2>
+        </div>
+
+        <Navbar isOpen={isOpen} ></Navbar>
+
+        <Button onTouchStart={touch} onClick={toggleMenu} className={styles.menuIcon}>
+          <Menu/>
+        </Button>
       </div>
-
-      <div className={styles.content}>
-        { children }
-      </div>
-
-      <div className={styles.menuTitle}>
-        <h2>WELCOME</h2>
-        <h2>FRIEND</h2>
-      </div>
-
-      <Button className={styles.menuIcon}>
-        <Menu/>
-      </Button>
     </div>
-  </div>
+  </StoreProvider>
+  
 }
 
 export default Layout;

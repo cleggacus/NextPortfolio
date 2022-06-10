@@ -5,3 +5,11 @@
   box-shadow: 10px 10px var(--fg-1);
   background-color: var(--bg-2);
 }
+
+
+@media only screen and (max-width: 900px) {
+  .container {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
