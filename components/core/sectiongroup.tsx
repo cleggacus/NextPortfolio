@@ -13,7 +13,7 @@ const SectionGroup: FC<SectionLayoutProps> = ({ sections }) => {
   // where the sections are on the page
   const [pageBreaks, setPageBreaks] = useState((new Array(sections.length)).fill(0));
 
-  const [state, dispatch] = useContext(StoreContext);
+  const [, dispatch] = useContext(StoreContext);
 
   const ref = useRef<HTMLDivElement>(null);
 
