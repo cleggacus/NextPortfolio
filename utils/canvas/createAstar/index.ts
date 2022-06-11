@@ -21,8 +21,10 @@ const getGridDims = (ctx: CanvasRenderingContext2D, cellSize: number): [number, 
 
 const animate = () => {
   if(astar && width && height && ctx) {
-    if(astar.isComplete())
+    if(astar.isComplete()) {
       astar.restart();
+      while(!astar.findValid());
+    }
 
     for(let i = 0; i < 10; i++)
       astar.next();
@@ -98,6 +100,8 @@ const createAstar = () => {
 
       [width, height] = getGridDims(ctx, 20);
       astar = new Astar(width, height);
+
+      while(!astar.findValid());
 
       animate();
 

@@ -5,6 +5,8 @@ class Astar {
   private static readonly PERLIN_RES = 0.1;
 
   private complete: boolean;
+  private found: boolean;
+
   private width: number;
   private height: number;
   private open: Node[];
@@ -23,6 +25,7 @@ class Astar {
     this.path = [];
     this.nodeGrid = [];
     this.complete = false;
+    this.found = false;
     
     this.createMap();
     this.createNodeGrid();
@@ -30,14 +33,17 @@ class Astar {
     this.open = [this.nodeGrid[0][0]];
   }
 
-  public restart() {
-    this.map = [];
+  public restart(map?: boolean[][]) {
+    this.map = map || [];
     this.closed = [];
     this.path = [];
     this.nodeGrid = [];
     this.complete = false;
+    this.found = false;
     
-    this.createMap();
+    if(!map)
+      this.createMap();
+
     this.createNodeGrid();
 
     this.open = [this.nodeGrid[0][0]];
@@ -70,6 +76,18 @@ class Astar {
     return this.map;
   }
 
+  public findValid() {
+    while(!this.complete)
+      this.next();
+
+    const found = this.found;
+    const map = this.map;
+
+    this.restart(found ? map : undefined)
+
+    return found;
+  }
+
   public next() {
     let [width, height] = this.getGridSize();
     let best: Node | undefined = undefined;
@@ -80,6 +98,7 @@ class Astar {
 
       if(bestX == width-1 && bestY == height-1) {
         this.complete = true;
+        this.found = true;
         return;
       }
 
