@@ -1,6 +1,15 @@
 .section1 {
   height: 100%;
 
+  .backCover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-2);
+  }
+
   .subsection1 {
     display: flex;
     width: 100%;
@@ -24,23 +33,11 @@
       h1 {
         margin: 0 0 10px 0;
         font-size: 5em;
-
-        text-shadow: 
-          5px 5px 0 var(--bg-2),
-          5px -5px 0 var(--bg-2),
-          -5px 5px 0 var(--bg-2),
-          -5px -5px 0 var(--bg-2);
       }
 
       p {
         margin: 0 0 0 0;
         font-size: 1.5em;
-
-        text-shadow: 
-          5px 5px 0 var(--bg-2),
-          5px -5px 0 var(--bg-2),
-          -5px 5px 0 var(--bg-2),
-          -5px -5px 0 var(--bg-2);
 
         .bold {
           font-weight: bold;
@@ -68,9 +65,11 @@
           45deg,
           var(--bg-1),
           var(--bg-1) 3px,
-          #00000000 3px,
-          #00000000 10px,
+          var(--bg-2) 3px,
+          var(--bg-2) 10px,
         );
+
+        border: 20px solid var(--bg-2);
         left: calc(-300px + 3%);
         width: 800px;
         height: 300px;
@@ -88,7 +87,9 @@
         object-fit: cover;
         filter: 
           drop-shadow(20px 0 0 var(--bg-2))
-          drop-shadow(-20px 0 0 var(--bg-2));
+          drop-shadow(-20px 0 0 var(--bg-2))
+          drop-shadow(0 20px 0 var(--bg-2))
+          drop-shadow(0 -20px 0 var(--bg-2));
       }
     }
   }

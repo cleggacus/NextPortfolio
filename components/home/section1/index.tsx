@@ -7,6 +7,16 @@ import Section, { SectionProps } from "../../core/section";
 const Section1: FC<SectionProps> = (props) => {
   const ref = useRef<HTMLDivElement>(null);
 
+  const fromBack = {
+    scroll: -30,
+    opacity: 1,
+  }
+
+  const toBack = {
+    scroll: -30 + 500,
+    opacity: 0,
+  }
+
   const from = {
     scroll: -30,
     opacity: 1,
@@ -22,6 +32,10 @@ const Section1: FC<SectionProps> = (props) => {
   }
   
   return <Section ref={ref} {...props} className={styles.section1}>
+    <Animate from={fromBack} to={toBack} >
+      <div className={styles.backCover}></div>
+    </Animate>
+
     <Animate from={from} to={to} >
       <div className={styles.subsection1}>
         <div className={styles.container1}>

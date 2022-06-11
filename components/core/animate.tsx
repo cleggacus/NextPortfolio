@@ -12,7 +12,6 @@ type AnimateProps = {
     opacity?: number,
     scale?: number
   }
-
   to: {
     scroll: number
     x?: number,
