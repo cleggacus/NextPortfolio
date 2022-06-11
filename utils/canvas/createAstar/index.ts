@@ -26,8 +26,7 @@ const animate = () => {
       while(!astar.findValid());
     }
 
-    for(let i = 0; i < 10; i++)
-      astar.next();
+    astar.next();
 
     const path = astar.getPath();
 

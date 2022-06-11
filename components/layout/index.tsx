@@ -45,15 +45,15 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       <div className={styles.containerInner}>
         <Canvas></Canvas>
 
-        <div className={styles.info}>
-          <p>@cleggacus / made with next.js</p>
-        </div>
-
         <div className={styles.content}>
           { children }
         </div>
 
         <div className={styles.fader}></div>
+
+        <div className={styles.info}>
+          <p>@cleggacus / made with next.js</p>
+        </div>
 
         <div className={styles.menuTitle}>
           <h2>WELCOME</h2>
