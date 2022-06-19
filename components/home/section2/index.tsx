@@ -59,10 +59,10 @@ const Card2 = () => {
     to={{scroll: -500, y: 0, opacity: 1}}
   >
     <Box className={styles.card}>
-      <h1>WEB DEV</h1>
+      <h1>OTHER DEV</h1>
 
       <div>
-        <p>Im a fullstack web developer with experience in NodeJS, TypeScript, React/NextJS, Express, MongoDB, SQL, CSS/SCSS and HTML.</p>
+        <p>Outside of web development I can program in C++ (11), C, Java, JavaScript and Python.<br/><br/>I am quick at learning new things and using prior knowledge in different situations.</p>
       </div>
     </Box>
   </Animate>

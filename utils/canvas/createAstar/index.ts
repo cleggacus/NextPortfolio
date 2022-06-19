@@ -1,13 +1,8 @@
 import { useContext, useEffect } from "react";
 import { StoreContext } from "../../../store";
-import Astar from "./astar";
+import { AstarResponseMessage, DrawData } from "./workerTypes";
 
-const getColor = (v: string) => window.getComputedStyle(document.documentElement).getPropertyValue(v);
-
-let ctx: CanvasRenderingContext2D;
-let astar: Astar;
-let width: number;
-let height: number;
+let processing = false;
 
 const getGridDims = (ctx: CanvasRenderingContext2D, cellSize: number): [number, number] => {
   const ctxW = ctx.canvas.width;
@@ -19,95 +14,104 @@ const getGridDims = (ctx: CanvasRenderingContext2D, cellSize: number): [number, 
   return [ gridW, gridH ]
 }
 
-const animate = () => {
-  if(astar && width && height && ctx) {
-    if(astar.isComplete()) {
-      astar.restart();
-      while(!astar.findValid());
-    }
+const getColor = (v: string) => window.getComputedStyle(document.documentElement).getPropertyValue(v);
 
-    astar.next();
+const draw = (ctx: CanvasRenderingContext2D, drawData: DrawData) => {
+  if(processing) return;
 
-    const path = astar.getPath();
+  processing = true;
 
-    const closed = astar.getClosed();
-    const open = astar.getOpen();
-    const map = astar.getMap();
+  const {
+    open, closed, path, map,
+    width, height
+  } = drawData;
 
-    const cellW = ctx.canvas.width / width;
-    const cellH = ctx.canvas.height / height;
-    const dotRadius = 3;
+  const cellW = ctx.canvas.width / width;
+  const cellH = ctx.canvas.height / height;
+  const dotRadius = 3;
 
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    for(const [x, y] of open) {
-      ctx.fillStyle = getColor("--bg-1");
-      ctx.beginPath();
-      ctx.arc(x * cellW, y * cellH, dotRadius, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.closePath();
-    }
-
-    for(const [x, y] of closed) {
-      ctx.fillStyle = getColor("--bg-1");
-      ctx.beginPath();
-      ctx.arc(x * cellW, y * cellH, dotRadius, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.closePath();
-    }
-
-    ctx.strokeStyle = getColor("--bg-3");
-    ctx.lineWidth = dotRadius*2;
-    ctx.lineJoin = "round";
-    ctx.lineCap = "round";
+  for(const [x, y] of open) {
+    ctx.fillStyle = getColor("--bg-1");
     ctx.beginPath();
-    ctx.moveTo(path[0][0] * cellW, path[0][1] * cellH);
-
-    for(let i = 1; i < path.length; i++) {
-      const [x, y] = path[i];
-      ctx.lineTo(x*cellW, y*cellH);
-    }
-
-    ctx.stroke();
+    ctx.arc(x * cellW, y * cellH, dotRadius, 0, 2 * Math.PI);
+    ctx.fill();
     ctx.closePath();
+  }
 
-    for(let y = 0; y < height; y++) {
-      for(let x = 0; x < width; x++) {
-        if(map[y][x]) {
-          ctx.fillStyle = getColor("--bg-3");
-          ctx.beginPath();
-          ctx.arc(x * cellW, y * cellH, dotRadius, 0, 2 * Math.PI);
-          ctx.fill();
-          ctx.closePath();
-        }
+  for(const [x, y] of closed) {
+    ctx.fillStyle = getColor("--bg-1");
+    ctx.beginPath();
+    ctx.arc(x * cellW, y * cellH, dotRadius, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  ctx.strokeStyle = getColor("--bg-3");
+  ctx.lineWidth = dotRadius*2;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(path[0][0] * cellW, path[0][1] * cellH);
+
+  for(let i = 1; i < path.length; i++) {
+    const [x, y] = path[i];
+    ctx.lineTo(x*cellW, y*cellH);
+  }
+
+  ctx.stroke();
+  ctx.closePath();
+
+  for(let y = 0; y < height; y++) {
+    for(let x = 0; x < width; x++) {
+      if(map[y][x]) {
+        ctx.fillStyle = getColor("--bg-3");
+        ctx.beginPath();
+        ctx.arc(x * cellW, y * cellH, dotRadius, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
       }
     }
+  }
 
-    requestAnimationFrame(animate)
+  processing = false;
+}
+
+const startAstar = (ctx: CanvasRenderingContext2D) => {
+  if(typeof Worker !== undefined) {
+    const worker = new Worker(new URL("./astar.worker.ts", import.meta.url));
+    const [width, height] = getGridDims(ctx, 20);
+
+    worker.addEventListener("message", (mes: any) => {
+      const data: AstarResponseMessage = mes.data;
+
+      switch(data.res) {
+        case "update":
+          draw(ctx, data.drawData);
+          break;
+      }
+    })
+
+    worker.postMessage({
+      req: "start",
+      width, height
+    });
   }
 }
 
-const createAstar = () => {
-  const [state] = useContext(StoreContext);
 
-  useEffect(() => {
-    if(state.canvasCtx) {
-      ctx = state.canvasCtx;
+const createAstar = (canvas?: HTMLCanvasElement) => {
+  if(!canvas) return;
 
-      ctx.canvas.width = ctx.canvas.clientWidth;
-      ctx.canvas.height = ctx.canvas.clientHeight;
+  const ctx = canvas.getContext("2d");
 
-      [width, height] = getGridDims(ctx, 20);
-      astar = new Astar(width, height);
-
-      while(!astar.findValid());
-
-      animate();
-
-      window.onresize = () => {}
-      window.onmousemove = e => {}
-    }
-  }, [state.canvasCtx])
+  if(ctx) {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+    console.log("start")
+    startAstar(ctx);
+  }
 }
 
 export default createAstar;

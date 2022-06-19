@@ -56,6 +56,7 @@ const perlinNoise = (width: number, height: number, perlinWidth: number, perlinH
     const y1 = Math.floor(perlinY);
     const y2 = Math.ceil(perlinY);
 
+
     for(let x = 0; x < width; x++) {
       const perlinX = (x/width) * (perlinWidth-1);
 
@@ -84,6 +85,7 @@ const perlinNoise = (width: number, height: number, perlinWidth: number, perlinH
       const c = a + smooth(p1d[1]) * (b - a);
 
       grid[y].push(c);
+
     }
   }
 
