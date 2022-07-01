@@ -5,11 +5,12 @@ export type SectionProps = {
   children?: ReactNode,
   className?: string,
   setTop?: (top: number) => void,
+  topOffsetPercent?: number,
   setOnScroll: (cb: ((top: number) => void)) => void,
   style?: CSSProperties
 }
 
-const Section = forwardRef<HTMLDivElement, SectionProps>(({ setTop, children, className, style }, ref) => {
+const Section = forwardRef<HTMLDivElement, SectionProps>(({ setTop, children, className, style, topOffsetPercent = 0 }, ref) => {
   const innerRef = useRef<HTMLDivElement>(null)
 
   useImperativeHandle(ref, () => innerRef.current as HTMLDivElement);
@@ -17,9 +18,9 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(({ setTop, children, cl
   useEffect(() => {
     if(innerRef.current) {
       if(setTop)
-        setTop(innerRef.current.offsetTop)
+        setTop(innerRef.current.offsetTop + innerRef.current.clientHeight * topOffsetPercent)
     }
-  }, [ref]);
+  }, [innerRef.current?.clientHeight, innerRef.current?.clientTop]);
 
   return <div style={style} ref={innerRef} className={`${styles.section} ${className}`}>
     { children } 

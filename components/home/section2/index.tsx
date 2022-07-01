@@ -1,48 +1,22 @@
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import styles from "../../../styles/home/section2.module.scss"
-import Animate from "../../core/animate";
-import Box, {Animation} from "../../core/box";
+import Box from "../../core/box";
 import Button from "../../core/button";
 import Section, { SectionProps } from "../../core/section";
 
-const Section2: FC<SectionProps> = (props) => {
-  const b1Animation: Animation = {
-    type: ["down", "opacity"],
-    amount: 600,
-    from: -1000,
-    to: -600
+const Section2: FC<SectionProps> = (props) => { 
+  const ref = useRef<HTMLDivElement>(null);
 
-  }
-
-  const b2Animation: Animation = {
-    type: ["down", "opacity"],
-    amount: 600,
-    from: -900,
-    to: -500
-  }
-
-  const b3Animation: Animation = {
-    type: ["down", "opacity"],
-    amount: 600,
-    from: -800,
-    to: -400
-  }
-
-  return <Section {...props} className={styles.container}>
-    <div className={styles.cardsOuter}>
-      <Card1></Card1>
-      <Card2></Card2>
-      <Card3></Card3>
-    </div>
+  return <Section {...props} ref={ref} topOffsetPercent={0.33} className={styles.container}>
+    <Card1></Card1>
+    <Card2></Card2>
+    <Card3></Card3>
   </Section>
 }
 
 const Card1 = () => {
-  return <Animate 
-    from={{scroll: -800, y: -600, opacity: 0}} 
-    to={{scroll: -400, y: 0, opacity: 1}}
-  >
+  return <div className={styles.cardOuter}>
     <Box className={styles.card}>
       <h1>WEB DEV</h1>
 
@@ -50,14 +24,11 @@ const Card1 = () => {
         <p>Im a fullstack web developer with experience in NodeJS, TypeScript, React/NextJS, Express, MongoDB, SQL, CSS/SCSS and HTML.</p>
       </div>
     </Box>
-  </Animate>
+  </div>
 }
 
 const Card2 = () => {
-  return <Animate 
-    from={{scroll: -900, y: -600, opacity: 0}} 
-    to={{scroll: -500, y: 0, opacity: 1}}
-  >
+  return <div className={styles.cardOuter}>
     <Box className={styles.card}>
       <h1>OTHER DEV</h1>
 
@@ -65,14 +36,11 @@ const Card2 = () => {
         <p>Outside of web development I can program in C++ (11), C, Java, JavaScript and Python.<br/><br/>I am quick at learning new things and using prior knowledge in different situations.</p>
       </div>
     </Box>
-  </Animate>
+  </div>
 }
 
 const Card3 = () => {
-  return <Animate 
-    from={{scroll: -1000, y: -600, opacity: 0}} 
-    to={{scroll: -600, y: 0, opacity: 1}}
-  >
+  return <div className={styles.cardOuter}>
     <Box className={styles.card}>
       <h1>ALGORITHMS</h1>
 
@@ -84,7 +52,7 @@ const Card3 = () => {
         <Button noShadow>VIEW SOME HERE</Button>
       </Link>
     </Box>
-  </Animate>
+  </div>
 }
 
 export default Section2;

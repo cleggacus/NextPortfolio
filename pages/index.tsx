@@ -12,8 +12,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     if(canvasRef.current)
       createAstar(canvasRef.current)
-  }, [canvasRef])
-
+  }, [canvasRef]);
 
   return <>
     <canvas ref={canvasRef} className={styles.canvasElem}/>
