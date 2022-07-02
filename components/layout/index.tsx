@@ -3,7 +3,6 @@ import { Menu } from "@styled-icons/boxicons-regular";
 import styles from "../../styles/layout.module.scss"
 import Button from "../core/button";
 import { StoreProvider } from "../../store";
-import Canvas from "./canvas";
 import Navbar from "./navbar";
 import Head from "next/head";
 
@@ -43,8 +42,6 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 
     <div className={styles.container}>
       <div className={styles.containerInner}>
-        <Canvas></Canvas>
-
         <div className={styles.content}>
           { children }
         </div>

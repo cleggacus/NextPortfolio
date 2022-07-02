@@ -76,11 +76,12 @@
         height: 300px;
       }
 
-      img {
+      .image {
         animation-name: fadeDown2;
         animation-duration: 1s;
 
         position: absolute;
+        overflow: hidden;
         left: 3%;
         border-radius: 30%;
         width: 500px;

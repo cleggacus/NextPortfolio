@@ -1,4 +1,4 @@
-import { CSSProperties, Dispatch, FC, forwardRef, ReactNode, SetStateAction, useEffect, useImperativeHandle, useRef } from "react"
+import { CSSProperties, forwardRef, ReactNode, useEffect, useImperativeHandle, useRef } from "react"
 import styles from "../../styles/core/sectiongroup.module.scss";
 
 export type SectionProps = {
@@ -20,7 +20,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(({ setTop, children, cl
       if(setTop)
         setTop(innerRef.current.offsetTop + innerRef.current.clientHeight * topOffsetPercent)
     }
-  }, [innerRef.current?.clientHeight, innerRef.current?.clientTop]);
+  }, [innerRef.current?.clientHeight, innerRef.current?.clientTop, setTop, topOffsetPercent]);
 
   return <div style={style} ref={innerRef} className={`${styles.section} ${className}`}>
     { children } 

@@ -22,13 +22,13 @@ const Navbar: FC<NavbarProps> = ({ isOpen }) => {
       <Button noShadow>HOME</Button>
     </Link>
 
-    <Link href="/algorithms">
+    {/* <Link href="/algorithms">
       <Button noShadow>ALGORITHMS</Button>
-    </Link>
+    </Link> */}
 
-    <Link href="/blog">
+    {/* <Link href="/blog">
       <Button noShadow>BLOG</Button>
-    </Link>
+    </Link> */}
 
     <Link href="/contact">
       <Button noShadow>CONTACT ME</Button>

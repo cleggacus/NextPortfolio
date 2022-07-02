@@ -58,7 +58,7 @@ const SectionGroup: FC<SectionLayoutProps> = ({ sections }) => {
         }
       }
     })
-  }, [ref])
+  }, [ref, dispatch, pageBreaks])
 
   // scrolls to page[i]
   const scroll = (i: number) => {

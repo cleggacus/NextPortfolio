@@ -45,12 +45,12 @@ const Card3 = () => {
       <h1>ALGORITHMS</h1>
 
       <div>
-        <p>I have experience coding a variety of algorithms such as path findeing, map generation, sorting, searching and neural networks.</p>
+        <p>I have experience coding a variety of algorithms such as path findeing, map generation, sorting, searching and neural networks. In the background is map generated with perlin noise and A* path finder.</p>
       </div>
 
-      <Link href="/algorithms">
+      {/* <Link href="/algorithms">
         <Button noShadow>VIEW SOME HERE</Button>
-      </Link>
+      </Link> */}
     </Box>
   </div>
 }

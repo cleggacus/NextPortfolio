@@ -1,7 +1,6 @@
 import '../styles/globals.scss'
 import Layout from "../components/layout"
 import type { AppProps } from 'next/app'
-import { useEffect } from 'react'
 import createAstar from '../utils/canvas/createAstar';
 
 function MyApp({ Component, pageProps }: AppProps) {

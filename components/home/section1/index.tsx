@@ -2,6 +2,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import styles from "../../../styles/home/section1.module.scss"
 import Button from "../../core/button";
 import Section, { SectionProps } from "../../core/section";
+import Image from "next/image";
 
 const Section1: FC<SectionProps> = (props) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -20,7 +21,9 @@ const Section1: FC<SectionProps> = (props) => {
 
       <div className={styles.container2}>
         <div className={styles.back}></div>
-        <img src="/profile1.png"></img>
+        <div className={styles.image}>
+          <Image layout='fill' objectFit='contain' alt="Picture of Liam Clegg" src="/profile1.png"></Image>
+        </div>
       </div>
     </div>
 
