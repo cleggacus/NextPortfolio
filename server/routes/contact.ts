@@ -4,6 +4,12 @@ import confirm from "../helper/contact/confirm";
 
 const router = express.Router();
 
+router.get("/me", (req: Request, res: Response, next: NextFunction) => {
+  res.status(200).json({
+    mes: "poggies"
+  })
+});
+
 router.post("/send", (req: Request, res: Response, next: NextFunction) => {
   const  {from, subject, text} = req.body;
 
