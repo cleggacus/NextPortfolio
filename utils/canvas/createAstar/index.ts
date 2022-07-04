@@ -3,6 +3,7 @@ import { StoreContext } from "../../../store";
 import { AstarResponseMessage, DrawData } from "./workerTypes";
 
 let processing = false;
+let worker: Worker | undefined = undefined;
 
 const getGridDims = (ctx: CanvasRenderingContext2D, cellSize: number): [number, number] => {
   const ctxW = ctx.canvas.width;
@@ -80,7 +81,7 @@ const draw = (ctx: CanvasRenderingContext2D, drawData: DrawData) => {
 
 const startAstar = (ctx: CanvasRenderingContext2D) => {
   if(typeof Worker !== undefined) {
-    const worker = new Worker(new URL("./astar.worker.ts", import.meta.url));
+    worker = new Worker(new URL("./astar.worker.ts", import.meta.url));
     const [width, height] = getGridDims(ctx, 20);
 
     worker.addEventListener("message", (mes: any) => {
@@ -114,4 +115,17 @@ const createAstar = (canvas?: HTMLCanvasElement) => {
   }
 }
 
+const stopAstar = () => {
+  console.log("w");
+  if(worker) {
+    worker.postMessage({
+      req: "stop"
+    })
+  }
+}
+
 export default createAstar;
+
+export {
+  stopAstar
+}
