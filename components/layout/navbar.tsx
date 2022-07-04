@@ -19,7 +19,7 @@ const Navbar: FC<NavbarProps> = ({ isOpen }) => {
 
   return <Box onTouchStart={stopPropergationTouch} onClick={stopPropergationMouse} className={`${styles.container} ${isOpen ? styles.open : styles.close}`} >
     <Link href="/">
-      <Button noShadow>HOME</Button>
+      <Button shadow="none">HOME</Button>
     </Link>
 
     {/* <Link href="/algorithms">
@@ -31,10 +31,10 @@ const Navbar: FC<NavbarProps> = ({ isOpen }) => {
     </Link> */}
 
     <Link href="/contact">
-      <Button noShadow>CONTACT ME</Button>
+      <Button shadow="none">CONTACT ME</Button>
     </Link>
 
-    <Button noShadow>DOWNLOAD CV</Button>
+    <Button shadow="none">DOWNLOAD CV</Button>
   </Box>
 }
 

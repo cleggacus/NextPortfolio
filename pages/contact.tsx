@@ -53,10 +53,10 @@ const Contact: NextPage = () => {
         <Box className={styles.box}>
           <h1>Contact Me</h1>
           <Input ref={emailRef} placeholder="EMAIL"></Input>
-          <Input ref={subjectRef}placeholder="SUBJECT"></Input>
+          <Input ref={subjectRef} placeholder="SUBJECT"></Input>
           <Textarea ref={messageRef} rows={4} placeholder="MESSAGE"></Textarea>
           <p className={styles.err}>{err}</p>
-          <Button onClick={send} noShadow>SEND MESSAGE</Button>
+          <Button onClick={send} noshadow>SEND MESSAGE</Button>
         </Box>
     }
   </div>

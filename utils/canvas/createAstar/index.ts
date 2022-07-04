@@ -110,13 +110,11 @@ const createAstar = (canvas?: HTMLCanvasElement) => {
   if(ctx) {
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
-    console.log("start")
     startAstar(ctx);
   }
 }
 
 const stopAstar = () => {
-  console.log("w");
   if(worker) {
     worker.postMessage({
       req: "stop"
