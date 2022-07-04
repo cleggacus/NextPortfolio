@@ -17,6 +17,10 @@ const Navbar: FC<NavbarProps> = ({ isOpen }) => {
     e.stopPropagation();
   }
 
+  const downloadCV = () => {
+    window.open("/CV.pdf", '_blank');
+  }
+
   return <Box onTouchStart={stopPropergationTouch} onClick={stopPropergationMouse} className={`${styles.container} ${isOpen ? styles.open : styles.close}`} >
     <Link href="/">
       <Button shadow="none">HOME</Button>
@@ -34,7 +38,7 @@ const Navbar: FC<NavbarProps> = ({ isOpen }) => {
       <Button shadow="none">CONTACT ME</Button>
     </Link>
 
-    <Button shadow="none">DOWNLOAD CV</Button>
+    <Button onClick={downloadCV} shadow="none">DOWNLOAD CV</Button>
   </Box>
 }
 

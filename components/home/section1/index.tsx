@@ -6,6 +6,11 @@ import Image from "next/image";
 
 const Section1: FC<SectionProps> = (props) => {
   const ref = useRef<HTMLDivElement>(null);
+
+  const downloadCV = () => {
+    window.open("/CV.pdf", '_blank');
+  }
+
   return <Section ref={ref} {...props} className={styles.section1}>
     <div className={styles.backCover}></div>
 
@@ -15,7 +20,7 @@ const Section1: FC<SectionProps> = (props) => {
           <p>Hi there, my name is</p>
           <h1>Liam Clegg</h1>
           <p>I&apos;m a <span className={styles.bold}>software engineer</span> and <span className={styles.bold}>fullstack web developer</span> who likes to bring unique and interesting projects to life.</p>
-          <Button shadow="block">Download CV</Button>
+          <Button onClick={downloadCV} shadow="block">Download CV</Button>
         </div>
       </div>
 
