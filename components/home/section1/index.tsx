@@ -15,7 +15,7 @@ const Section1: FC<SectionProps> = (props) => {
           <p>Hi there, my name is</p>
           <h1>Liam Clegg</h1>
           <p>I&apos;m a <span className={styles.bold}>software engineer</span> and <span className={styles.bold}>fullstack web developer</span> who likes to bring unique and interesting projects to life.</p>
-          <Button>Download CV</Button>
+          <Button shadow="block">Download CV</Button>
         </div>
       </div>
 

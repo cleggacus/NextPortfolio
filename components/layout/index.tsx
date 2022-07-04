@@ -59,7 +59,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 
         <Navbar isOpen={isOpen} ></Navbar>
 
-        <Button shadow="none" onTouchStart={touch} onClick={toggleMenu} className={styles.menuIcon}>
+        <Button shadow="block" onTouchStart={touch} onClick={toggleMenu} className={styles.menuIcon}>
           <Menu/>
         </Button>
       </div>

@@ -56,7 +56,7 @@ const Contact: NextPage = () => {
           <Input ref={subjectRef} placeholder="SUBJECT"></Input>
           <Textarea ref={messageRef} rows={4} placeholder="MESSAGE"></Textarea>
           <p className={styles.err}>{err}</p>
-          <Button onClick={send} noshadow>SEND MESSAGE</Button>
+          <Button onClick={send} shadow="none">SEND MESSAGE</Button>
         </Box>
     }
   </div>
