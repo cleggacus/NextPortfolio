@@ -35,9 +35,11 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 
   return <StoreProvider>
     <Head>
-      <title>Liam Clegg</title>
-      <meta name="Description" content="Liam Clegg (Web Developer and Software Engineer) Portfolio. @cleggacus." />
+      <title>Liam Clegg Portfolio</title>
       <meta name="google-site-verification" content="3TWlMtTbXwzc_DEwdD0GPxai7TryXaSKAyYExdqLW9M" />
+      <meta name="description" content="Liam Clegg (Web Developer and Software Engineer) Portfolio. @cleggacus." />
+      <meta name="keywords" content="portfolio, web developer, software engineer, frontend developer, backend developer, fullstack developer, liam clegg, clegg, liam, liamclegg, cleggacus, programmer, developer, computer science, swansea, london, swansea university" />
+      <meta name="author" content="Liam Clegg" />
     </Head>
 
     <div className={styles.container}>
