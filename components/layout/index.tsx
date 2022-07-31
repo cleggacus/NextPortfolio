@@ -40,7 +40,13 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       <meta name="description" content="Liam Clegg (Web Developer and Software Engineer) Portfolio. @cleggacus." />
       <meta name="keywords" content="portfolio, web developer, software engineer, frontend developer, backend developer, fullstack developer, liam clegg, clegg, liam, liamclegg, cleggacus, programmer, developer, computer science, swansea, london, swansea university" />
       <meta name="author" content="Liam Clegg" />
+      <meta name="robots" content="index, follow" />
+      <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+
     </Head>
+
 
     <div className={styles.container}>
       <div className={styles.containerInner}>
