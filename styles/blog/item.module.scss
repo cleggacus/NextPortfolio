@@ -1,0 +1,51 @@
+.container {
+  height: 350px;
+  // width: 400px;
+
+  .content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .thumbnail {
+      width: 100%;
+      height: 184px;
+
+      .image {
+        object-fit: cover;
+        width: 100%;
+        height: 184px;
+      }
+    }
+
+    .info {
+      width: 100%;
+      flex: 1;
+      padding: 30px;
+
+      h2 {
+        margin: 0 0 10px 0;
+        font-weight: normal;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+      }
+
+      p {
+        margin: 0;
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+      }
+    }
+  }
+}
