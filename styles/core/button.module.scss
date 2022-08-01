@@ -8,12 +8,13 @@
   color: var(--fg-1);
   font-size: 1em;
   font-weight: bold;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   user-select: none;
 }
 
 .container.shadow {
   box-shadow: 5px 5px var(--fg-1);
+  transform: translate(0, 0);
 }
 
 .container:hover {
@@ -22,4 +23,5 @@
 
 .container.shadow:hover {
   box-shadow: 10px 10px var(--fg-1) !important;
+  transform: translate(-5px, -5px);
 }

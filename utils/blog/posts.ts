@@ -1,5 +1,5 @@
-import {Client, isFullPage} from '@notionhq/client';
-import { GetPagePropertyResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import {Client, isFullBlock, isFullPage} from '@notionhq/client';
+import { BlockObjectResponse, GetPagePropertyResponse, ListBlockChildrenResponse, PageObjectResponse, PartialBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 
 const client = new Client({
   auth: process.env.NOTION_TOKEN,
@@ -36,11 +36,16 @@ const collectProperties = async (page: PageObjectResponse) => {
 }
 
 type Post = {
+  id: string,
   title: string,
   description: string,
   created: string,
   thumbnail: string,
-  tags: string[],
+  tags: {
+    color: string,
+    name: string
+  }[],
+  blocks?: (PartialBlockObjectResponse | BlockObjectResponse)[]
 }
 
 const postFromProperties = (data: Properties): Post =>{
@@ -54,6 +59,7 @@ const postFromProperties = (data: Properties): Post =>{
     data.Tags.object == "property_item" &&
     data.Tags.type == "multi_select"
   )) return {
+    id: "",
     title: "",
     description: "",
     created: "",
@@ -63,10 +69,14 @@ const postFromProperties = (data: Properties): Post =>{
 
 
   let post = {
+    id: "",
     title: data.Name.results[0].title.plain_text,
     description: data.Description.results[0].rich_text.plain_text,
     created: data.Created.created_time,
-    tags: data.Tags.multi_select.map(res => res.name),
+    tags: data.Tags.multi_select.map(res => ({
+      name: res.name,
+      color: res.color
+    })),
     thumbnail: ""
   }
 
@@ -80,6 +90,7 @@ async function posts() {
 
   let responses = [];
   let thumbnails: string[] = []
+  let ids: string[] = []
 
   for (const page of pages.results) {
     if (!isFullPage(page))
@@ -89,18 +100,51 @@ async function posts() {
     const thumbnail = (page.cover?.type == "external" ? page.cover.external.url : page.cover?.file.url) || ""
 
     thumbnails.push(thumbnail);
+    ids.push(page.id);
     responses.push(properties);
   }
 
   const posts = responses.map((res, i) => ({
     ...postFromProperties(res),
-    thumbnail: thumbnails[i]
+    thumbnail: thumbnails[i],
+    id: ids[i]
   }));
 
   return posts;
 }
 
+const getPost = async (id: string) => {
+  const page = await client.pages.retrieve({
+    page_id: id,
+  });
+
+  if (!isFullPage(page))
+    return null;
+
+  const properties: Properties = await collectProperties(page);
+  const thumbnail = (page.cover?.type == "external" ? page.cover.external.url : page.cover?.file.url) || "";
+
+  const blocks = await client.blocks.children.list({
+    block_id: id
+  });
+
+  const post: Post = {
+    ...postFromProperties(properties),
+    id: id,
+    thumbnail,
+    blocks: blocks.results
+  }
+
+  if(post.blocks)
+    console.log(post.blocks[0]);
+
+  return post;
+}
+
 export default posts;
+export {
+  getPost
+} 
 
 export type {
   Post

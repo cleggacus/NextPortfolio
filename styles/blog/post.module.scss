@@ -1,0 +1,24 @@
+.container {
+  padding: 100px;
+
+  .content {
+    margin: 0 auto;
+    max-width: 1000px;
+
+    .info {
+      width: 100%;
+    }
+
+    .thumbnail {
+      width: 100%;
+      height: 500px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+}

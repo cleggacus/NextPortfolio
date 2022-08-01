@@ -1,6 +1,24 @@
+$tagDefault: #ababab;
+$tagGray: #626262;
+$tagBrown: #815b3a;
+$tagOrange: #e7864e;
+$tagYellow: #c3ac3e;
+$tagGreen: #66bd64;
+$tagBlue: #5a9db7;
+$tagPurple: #9c76ce;
+$tagPink: #cd5e87;
+$tagRed: #c55454;
+
+.container:hover {
+  box-shadow: 20px 20px var(--fg-1) !important;
+  transform: translate(-10px, -10px);
+}
+
 .container {
-  height: 350px;
-  // width: 400px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  height: 400px;
+  transform: translate(0, 0);
 
   .content {
     width: 100%;
@@ -10,19 +28,19 @@
 
     .thumbnail {
       width: 100%;
-      height: 184px;
+      flex: 1;
+      overflow: hidden;
 
       .image {
         object-fit: cover;
         width: 100%;
-        height: 184px;
+        height: 100%;
       }
     }
 
     .info {
       width: 100%;
-      flex: 1;
-      padding: 30px;
+      padding: 30px 30px 20px 30px;
 
       h2 {
         margin: 0 0 10px 0;
@@ -36,8 +54,11 @@
         white-space: normal;
       }
 
+      .date {
+        margin: 0 0 10px 0;
+      }
+
       p {
-        margin: 0;
 
         text-overflow: ellipsis;
         overflow: hidden;
@@ -45,6 +66,37 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         white-space: normal;
+      }
+    }
+
+    .tags {
+      position: relative;
+      width: 100%;
+      float: left;
+
+      .tag.default { background-color: $tagDefault; }
+      .tag.gray { background-color: $tagGray; }
+      .tag.brown { background-color: $tagBrown; }
+      .tag.orange { background-color: $tagOrange; }
+      .tag.yellow { background-color: $tagYellow; }
+      .tag.green { background-color: $tagGreen; }
+      .tag.blue { background-color: $tagBlue; }
+      .tag.purple { background-color: $tagPurple; }
+      .tag.pink { background-color: $tagPink; }
+      .tag.red { background-color: $tagRed; }
+
+      .tag {
+        float: left;
+        width: fit-content;
+        padding: 5px 10px;
+        margin: 0 10px 10px 0;
+
+        p {
+          display: relative;
+          margin: 0;
+          font-weight: normal;
+          color: #fff;
+        }
       }
     }
   }
