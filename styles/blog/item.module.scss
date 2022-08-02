@@ -27,14 +27,13 @@ $tagRed: #c55454;
     flex-direction: column;
 
     .thumbnail {
+      position: relative;
       width: 100%;
       flex: 1;
       overflow: hidden;
 
       .image {
         object-fit: cover;
-        width: 100%;
-        height: 100%;
       }
     }
 

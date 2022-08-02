@@ -1,40 +1,29 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import BlogItem from "../../components/blog/Item";
 
 import styles from "../../styles/blog/blog.module.scss"
-import posts, { Post } from "../../utils/blog/posts";
+import { getPosts, Post } from "../../utils/blog";
 
 type Props = {
   posts: Post[]
 }
 
 const Blog: NextPage<Props> = ({ posts }) => {
-  console.log(posts);
-
   return <div className={styles.container} >
     <div className={styles.content}>
       <div className={styles.grid}>
         {
-          posts.map(post => (
-            <BlogItem post={post}></BlogItem>
+          posts.map((post, i) => (
+            <BlogItem key={i} post={post}></BlogItem>
           ))
         }
-        {/* <BlogItem blogInfo={testBlogInfo}></BlogItem>
-        <BlogItem blogInfo={testBlogInfo}></BlogItem>
-        <BlogItem blogInfo={testBlogInfo}></BlogItem>
-        <BlogItem blogInfo={testBlogInfo}></BlogItem>
-        <BlogItem blogInfo={testBlogInfo}></BlogItem>
-        <BlogItem blogInfo={testBlogInfo}></BlogItem>
-        <BlogItem blogInfo={testBlogInfo}></BlogItem>
-        <BlogItem blogInfo={testBlogInfo}></BlogItem>
-        <BlogItem blogInfo={testBlogInfo}></BlogItem> */}
       </div>
     </div>
   </div>
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const results = await posts() || [];
+export const getStaticProps: GetStaticProps = async () => {
+  const results = await getPosts() || [];
 
   return {
     props: {
@@ -42,5 +31,5 @@ export const getServerSideProps: GetServerSideProps = async () => {
     }
   }
 }
-// 
+
 export default Blog;
