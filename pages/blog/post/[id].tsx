@@ -6,6 +6,7 @@ import getLongDate from '../../../utils/getLongDate';
 import Image from "next/image";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Box from '../../../components/core/box';
+import Head from 'next/head';
 
 type Props = {
   post?: Post
@@ -60,6 +61,16 @@ const renderBlock = (block: BlockObjectResponse) => {
 
 const PostPage: NextPage<Props> = ({ post }) => {
   return <div className={styles.container} >
+    <Head>
+      <title>{post?.title}</title>
+      <meta name="google-site-verification" content="3TWlMtTbXwzc_DEwdD0GPxai7TryXaSKAyYExdqLW9M" />
+      <meta name="description" content={post?.description} />
+      <meta name="keywords" content={`${post?.tags.join(', ')}, portfolio, web developer, software engineer, frontend developer, backend developer, fullstack developer, liam clegg, clegg, liam, liamclegg, cleggacus, programmer, developer, computer science, swansea, london, swansea university`} />
+      <meta name="author" content="Liam Clegg" />
+      <meta name="robots" content="index, follow" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </Head>
+
     <div className={styles.content}>
       <div className={styles.info} >
         <p>{post ? getLongDate(post.created) : ""}</p>
