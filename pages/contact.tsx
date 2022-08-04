@@ -47,7 +47,8 @@ const Contact: NextPage = () => {
     {
       sent ?
         <Box className={styles.box}>
-          <h1 className={styles.sentTitle}>Message sent.</h1>
+          <h1 className={styles.sentTitle}>Message has been sent.</h1>
+          <p>If you do not get a confirmation email message me at cleggacus@gmail.com</p>
         </Box>
         :
         <Box className={styles.box}>
