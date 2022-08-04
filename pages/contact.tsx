@@ -11,10 +11,11 @@ const Contact: NextPage = () => {
   const subjectRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
-  const [sent, setSent] = useState(false)
-  const [err, setErr] = useState("");
+  const [sent, setSent] = useState<"unsent" | "sending" | "sent" | "err">("unsent")
 
   const send = () => {
+    setSent("sending")
+
     if(!emailRef.current || !subjectRef.current || !messageRef.current)
       return;
 
@@ -23,8 +24,6 @@ const Contact: NextPage = () => {
       subject: subjectRef.current.value,
       text: messageRef.current.value
     }
-
-    let status = 0;
 
     fetch("/api/contact/send", {
       method: 'POST',
@@ -36,27 +35,33 @@ const Contact: NextPage = () => {
       .then(res => res.json())
       .then(data => {
         if(data.mes == "sent") {
-          setSent(true)
+          setSent("sent")
         } else {
-          setErr(data.mes);
+          setSent("err")
         }
       })
   }
 
   return <div className={styles.container}>
     {
-      sent ?
+      sent == "sent" ?
         <Box className={styles.box}>
-          <h1 className={styles.sentTitle}>Message has been sent.</h1>
-          <p>If you do not get a confirmation email message me at cleggacus@gmail.com</p>
-        </Box>
-        :
+          <h1 className={styles.sentTitle}>Message sent successfully.</h1>
+        </Box> :
+      sent == "sending" ?
+        <Box className={styles.box}>
+          <h1 className={styles.sentTitle}>Sending . . .</h1>
+        </Box> :
+      sent == "err" ?
+        <Box className={styles.box}>
+          <h1 className={styles.sentTitle}>An error has occured.</h1>
+          <p>Send a email to cleggaus@gmail.com if you wish to contact me.</p>
+        </Box> :
         <Box className={styles.box}>
           <h1>Contact Me</h1>
           <Input ref={emailRef} placeholder="EMAIL"></Input>
           <Input ref={subjectRef} placeholder="SUBJECT"></Input>
           <Textarea ref={messageRef} rows={4} placeholder="MESSAGE"></Textarea>
-          <p className={styles.err}>{err}</p>
           <Button onClick={send} shadow="none">SEND MESSAGE</Button>
         </Box>
     }

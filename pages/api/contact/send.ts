@@ -12,13 +12,25 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   if(req.method == 'POST') {
-    const {from, subject, text} = req.body;
+    return new Promise<void>((resolve, reject) => {
+      const {from, subject, text} = req.body;
 
-    sendme(from, subject, text)
-      .then(() => confirm(from))
+      sendme(from, subject, text)
+        .then(_info => confirm(from))
+        .then(_info => {
+          res.status(200).json({
+            mes: "sent"
+          });
 
-    res.status(200).json({
-      mes: "sent"
-    });
+          resolve();
+        })
+        .catch(err => {
+          res.status(500).json({
+            mes: err
+          });
+
+          resolve();
+        })
+      })
   }
 }
