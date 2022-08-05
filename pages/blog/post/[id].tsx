@@ -63,12 +63,18 @@ const PostPage: NextPage<Props> = ({ post }) => {
   return <div className={styles.container} >
     <Head>
       <title>{post?.title}</title>
-      <meta name="google-site-verification" content="3TWlMtTbXwzc_DEwdD0GPxai7TryXaSKAyYExdqLW9M" />
       <meta name="description" content={post?.description} />
-      <meta name="keywords" content={`${post?.tags.join(', ')}, portfolio, web developer, software engineer, frontend developer, backend developer, fullstack developer, liam clegg, clegg, liam, liamclegg, cleggacus, programmer, developer, computer science, swansea, london, swansea university`} />
-      <meta name="author" content="Liam Clegg" />
-      <meta name="robots" content="index, follow" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="keywords" content={`${post?.tags.join(', ')}, blog, liam clegg blog, cleggacus blog, tech blog, tutorials, coding tutorials, portfolio, web developer, software engineer, frontend developer, backend developer, fullstack developer, liam clegg, clegg, liam, liamclegg, cleggacus, programmer, developer, computer science, swansea, london, swansea university`} />
+
+      <meta name="twitter:card" content="summary"/>
+      <meta name="twitter:title" content={post?.title} />
+      <meta name="twitter:description" content={post?.description} />
+      <meta name="twitter:image" content={post?.thumbnail} />
+
+      <meta property="og:title" content={post?.title} />
+      <meta property="og:description" content={post?.description} />
+      <meta property="og:image" content={post?.thumbnail} />
+      <meta property="og:url" content={`https://liamclegg.co.uk/blog/post/${post?.id}`} />
     </Head>
 
     <div className={styles.content}>

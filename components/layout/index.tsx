@@ -38,7 +38,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       <title>Liam Clegg Portfolio</title>
       <meta name="google-site-verification" content="3TWlMtTbXwzc_DEwdD0GPxai7TryXaSKAyYExdqLW9M" />
       <meta name="description" content="Liam Clegg (Web Developer and Software Engineer) Portfolio. @cleggacus." />
-      <meta name="keywords" content="portfolio, web developer, software engineer, frontend developer, backend developer, fullstack developer, liam clegg, clegg, liam, liamclegg, cleggacus, programmer, developer, computer science, swansea, london, swansea university" />
+      <meta name="keywords" content="blog, liam clegg blog, cleggacus blog, tech blog, tutorials, coding tutorials, portfolio, web developer, software engineer, frontend developer, backend developer, fullstack developer, liam clegg, clegg, liam, liamclegg, cleggacus, programmer, developer, computer science, swansea, london, swansea university" />
       <meta name="author" content="Liam Clegg" />
       <meta name="robots" content="index, follow" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -1,4 +1,5 @@
 import { GetServerSideProps, GetStaticProps, NextPage } from "next";
+import Head from "next/head";
 import BlogItem from "../../components/blog/Item";
 
 import styles from "../../styles/blog/blog.module.scss"
@@ -10,6 +11,10 @@ type Props = {
 
 const Blog: NextPage<Props> = ({ posts }) => {
   return <div className={styles.container} >
+    <Head>
+      <title>Blog | Liam Clegg</title>
+    </Head>
+
     <div className={styles.content}>
       <div className={styles.grid}>
         {
