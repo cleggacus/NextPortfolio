@@ -32,17 +32,18 @@ const addBlocksToPost = async (post: Post) => {
 
 const convertPageToPost = async (page: PageObjectResponse, blocks = false) => {
   const thumbnail = (page.cover?.type == "external" ? page.cover.external.url : page.cover?.file.url) || ""
-  const thumbnailLocation = await saveImage(thumbnail, `blog/${page.id}`, "thumbnail");
+  // const thumbnailLocation = await saveImage(thumbnail, `blog/${page.id}`, "thumbnail");
   const collectedProperties: Properties = await collectProperties(page);
 
   let post = {
     ...convertPropertiesToPost(collectedProperties),
     id: page.id,
-    thumbnail: thumbnailLocation || ""
+    // thumbnail: thumbnailLocation || ""
+    thumbnail
   }
 
-  if(blocks)
-    await addBlocksToPost(post);
+  // if(blocks)
+  //   await addBlocksToPost(post);
 
   return post;
 }
