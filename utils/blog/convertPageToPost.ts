@@ -16,15 +16,15 @@ const addBlocksToPost = async (post: Post) => {
   for(let block of response) {
     if(!isFullBlock(block)) continue;
 
-    if(block.type == "image") {
-      if(block.image.type == "external") {
-        const location = await saveImage(block.image.external.url, `blog/${post.id}`, block.id)
-        block.image.external.url = location || block.image.external.url;
-      } else {
-        const location = await saveImage(block.image.file.url, `blog/${post.id}`, block.id)
-        block.image.file.url = location || block.image.file.url;
-      }
-    }
+    // if(block.type == "image") {
+    //   if(block.image.type == "external") {
+    //     const location = await saveImage(block.image.external.url, `blog/${post.id}`, block.id)
+    //     block.image.external.url = location || block.image.external.url;
+    //   } else {
+    //     const location = await saveImage(block.image.file.url, `blog/${post.id}`, block.id)
+    //     block.image.file.url = location || block.image.file.url;
+    //   }
+    // }
 
     post.blocks.push(block);
   }
@@ -42,8 +42,8 @@ const convertPageToPost = async (page: PageObjectResponse, blocks = false) => {
     thumbnail
   }
 
-  // if(blocks)
-  //   await addBlocksToPost(post);
+  if(blocks)
+    await addBlocksToPost(post);
 
   return post;
 }
