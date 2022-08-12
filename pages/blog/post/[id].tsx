@@ -114,7 +114,8 @@ export const getStaticProps: GetStaticProps<{},IParams> = async (ctx) => {
   return {
     props: {
       post
-    }
+    },
+    revalidate: 60
   }
 }
 export const getStaticPaths: GetStaticPaths = async () => {
