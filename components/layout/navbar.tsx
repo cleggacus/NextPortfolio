@@ -34,7 +34,7 @@ const Navbar: FC<NavbarProps> = ({ isOpen }) => {
       <Button shadow="none">BLOG</Button>
     </Link>
 
-    <Link href="https://pastebin.liamcleg.co.uk/">
+    <Link href="https://pastebin.liamclegg.co.uk/">
       <Button shadow="none">PASTE BIN</Button>
     </Link>
 
