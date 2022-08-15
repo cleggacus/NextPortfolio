@@ -34,7 +34,7 @@ const Navbar: FC<NavbarProps> = ({ isOpen }) => {
       <Button shadow="none">BLOG</Button>
     </Link>
 
-    <Link href="https://mypastebin.vercel.app">
+    <Link href="https://pastebin.liamcleg.co.uk/">
       <Button shadow="none">PASTE BIN</Button>
     </Link>
 

@@ -27,7 +27,7 @@ const Section1: FC<SectionProps> = (props) => {
       <div className={styles.container2}>
         <div className={styles.back}></div>
         <div className={styles.image}>
-          <Image layout='fill' objectFit='contain' alt="Picture of Liam Clegg" src="/profile1.png"></Image>
+          <Image priority={true} layout='fill' objectFit='contain' alt="Picture of Liam Clegg" src="/profile1.png"></Image>
         </div>
       </div>
     </div>
