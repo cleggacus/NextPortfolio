@@ -1,5 +1,5 @@
 import { BlockObjectResponse, ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
-import { GetStaticProps, NextPage, GetStaticPaths } from 'next';
+import { GetStaticProps, NextPage, GetStaticPaths, GetServerSideProps } from 'next';
 import styles from "../../../styles/blog/post.module.scss"
 import { getPosts, getPost, Post } from '../../../utils/blog';
 import getLongDate from '../../../utils/getLongDate';
@@ -102,20 +102,19 @@ type IParams = {
   id: string
 }
 
-export const getStaticProps: GetStaticProps<{},IParams> = async (ctx) => {
-  if(!ctx.params)
+export const getStaticProps: GetStaticProps<{},IParams> = async ({ params }) => {
+  if(!params)
     return {
       props: {}
     }
 
-  const { id } = ctx.params;
+  const { id } = params;
   const post = await getPost(id);
 
   return {
     props: {
       post
-    },
-    revalidate: 60
+    }
   }
 }
 export const getStaticPaths: GetStaticPaths = async () => {

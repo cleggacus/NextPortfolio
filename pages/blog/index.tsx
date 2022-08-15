@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import BlogItem from "../../components/blog/Item";
 
@@ -27,14 +27,18 @@ const Blog: NextPage<Props> = ({ posts }) => {
   </div>
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=60'
+  )
+
   const results = await getPosts() || [];
 
   return {
     props: {
       posts: results
-    },
-    revalidate: 60
+    }
   }
 }
 
