@@ -64,7 +64,7 @@ const renderBlock = (block: BlockObjectResponse) => {
 const PostPage: NextPage<Props> = ({ post, date }) => {
   useEffect(() => {
     console.log("generated at:", date);
-  }, []);
+  }, [date]);
 
   return <div className={styles.container} >
     <Head>

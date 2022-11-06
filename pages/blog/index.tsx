@@ -14,7 +14,8 @@ type Props = {
 const Blog: NextPage<Props> = ({ posts, date }) => {
   useEffect(() => {
     console.log("generated at:", date);
-  }, [])
+  }, [date]);
+
   return <div className={styles.container} >
     <Head>
       <title>Blog | Liam Clegg</title>
