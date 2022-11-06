@@ -16,31 +16,17 @@ const addBlocksToPost = async (post: Post) => {
   for(let block of response) {
     if(!isFullBlock(block)) continue;
 
-    // if(block.type == "image") {
-    //   if(block.image.type == "external") {
-    //     const location = await saveImage(block.image.external.url, `blog/${post.id}`, block.id)
-    //     block.image.external.url = location || block.image.external.url;
-    //   } else {
-    //     const location = await saveImage(block.image.file.url, `blog/${post.id}`, block.id)
-    //     block.image.file.url = location || block.image.file.url;
-    //   }
-    // }
-
     post.blocks.push(block);
   }
 }
 
 const convertPageToPost = async (page: PageObjectResponse, blocks = false) => {
   const thumbnail = (page.cover?.type == "external" ? page.cover.external.url : page.cover?.file.url) || ""
-  // const thumbnailLocation = await saveImage(thumbnail, `blog/${page.id}`, "thumbnail");
   const collectedProperties: Properties = await collectProperties(page);
-
-  console.log(thumbnail)
 
   let post = {
     ...convertPropertiesToPost(collectedProperties),
     id: page.id,
-    // thumbnail: thumbnailLocation || ""
     thumbnail
   }
 

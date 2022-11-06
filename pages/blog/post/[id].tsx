@@ -7,9 +7,11 @@ import Image from "next/image";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Box from '../../../components/core/box';
 import Head from 'next/head';
+import { useEffect } from 'react';
 
 type Props = {
-  post?: Post
+  post?: Post,
+  date?: number
 }
 
 const getImageSrc = (block: ImageBlockObjectResponse) => {
@@ -59,7 +61,11 @@ const renderBlock = (block: BlockObjectResponse) => {
   return <></>
 }
 
-const PostPage: NextPage<Props> = ({ post }) => {
+const PostPage: NextPage<Props> = ({ post, date }) => {
+  useEffect(() => {
+    console.log("generated at:", date);
+  }, []);
+
   return <div className={styles.container} >
     <Head>
       <title>{post?.title}</title>
@@ -113,7 +119,8 @@ export const getStaticProps: GetStaticProps<{},IParams> = async ({ params }) => 
 
   return {
     props: {
-      post
+      post,
+      date: Date.now()
     },
     revalidate: 10,
   }

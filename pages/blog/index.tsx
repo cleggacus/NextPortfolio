@@ -1,15 +1,20 @@
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import { useEffect } from "react";
 import BlogItem from "../../components/blog/Item";
 
 import styles from "../../styles/blog/blog.module.scss"
 import { getPosts, Post } from "../../utils/blog";
 
 type Props = {
-  posts: Post[]
+  posts: Post[],
+  date: number
 }
 
-const Blog: NextPage<Props> = ({ posts }) => {
+const Blog: NextPage<Props> = ({ posts, date }) => {
+  useEffect(() => {
+    console.log("generated at:", date);
+  }, [])
   return <div className={styles.container} >
     <Head>
       <title>Blog | Liam Clegg</title>
@@ -26,19 +31,15 @@ const Blog: NextPage<Props> = ({ posts }) => {
     </div>
   </div>
 }
-
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=60'
-  )
-
+export const getStaticProps: GetStaticProps<{}> = async () => {
   const results = await getPosts() || [];
 
   return {
     props: {
-      posts: results
-    }
+      posts: results,
+      date: Date.now()
+    },
+    revalidate: 10 
   }
 }
 
