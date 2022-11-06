@@ -114,9 +114,11 @@ export const getStaticProps: GetStaticProps<{},IParams> = async ({ params }) => 
   return {
     props: {
       post
-    }
+    },
+    revalidate: 10,
   }
 }
+
 export const getStaticPaths: GetStaticPaths = async () => {
    let res = await getPosts() || [];
 

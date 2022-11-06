@@ -35,6 +35,8 @@ const convertPageToPost = async (page: PageObjectResponse, blocks = false) => {
   // const thumbnailLocation = await saveImage(thumbnail, `blog/${page.id}`, "thumbnail");
   const collectedProperties: Properties = await collectProperties(page);
 
+  console.log(thumbnail)
+
   let post = {
     ...convertPropertiesToPost(collectedProperties),
     id: page.id,
