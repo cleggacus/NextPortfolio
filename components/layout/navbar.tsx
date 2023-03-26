@@ -30,9 +30,9 @@ const Navbar: FC<NavbarProps> = ({ isOpen }) => {
       <Button noShadow>ALGORITHMS</Button>
     </Link> */}
 
-    <Link href="/blog">
+    {/* <Link href="/blog">
       <Button shadow="none">BLOG</Button>
-    </Link>
+    </Link> */}
 
     <Link href="https://pastebin.liamclegg.co.uk/">
       <Button shadow="none">PASTE BIN</Button>
