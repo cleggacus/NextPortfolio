@@ -1,5 +1,4 @@
-import { BlockObjectResponse, ImageBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
-import { GetStaticProps, NextPage, GetStaticPaths, GetServerSideProps } from 'next';
+import { GetStaticProps, NextPage, GetStaticPaths } from 'next';
 import styles from "../../../styles/blog/post.module.scss"
 import { getPosts, getPost, Post } from '../../../utils/blog';
 import getLongDate from '../../../utils/getLongDate';
@@ -7,58 +6,14 @@ import Image from "next/image";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import Box from '../../../components/core/box';
 import Head from 'next/head';
+import ReactMarkdown from 'react-markdown';
 import { useEffect } from 'react';
+
+import theme from 'react-syntax-highlighter/dist/cjs/styles/prism/one-light';
 
 type Props = {
   post?: Post,
   date?: number
-}
-
-const getImageSrc = (block: ImageBlockObjectResponse) => {
-  return block.image.type == "external" ?
-    block.image.external.url :
-    block.image.file.url
-}
-
-const renderBlock = (block: BlockObjectResponse) => {
-  switch (block.type) {
-    case 'heading_1': 
-      return <h1>{block.heading_1.rich_text[0].plain_text}</h1>
-    case 'heading_2': 
-      return <h2>{block.heading_2.rich_text[0].plain_text}</h2>
-    case 'heading_3':
-      return <h3>{block.heading_3.rich_text[0].plain_text}</h3>
-    case 'paragraph':
-      return <p>{
-        block.paragraph.rich_text.map((el, i) => {
-          if(el.href)
-            return <a key={i} href={el.href}>{el.plain_text}</a>
-
-          return <span key={i}>{el.plain_text}</span>;
-        })
-      }</p>
-    case 'code':
-      if(block.code.rich_text[0])
-        return <Box className={styles.syntaxHighlighter}>
-          <SyntaxHighlighter language={block.code.language} >
-            {block.code.rich_text[0].plain_text}
-          </SyntaxHighlighter>
-        </Box>
-      return <p></p>
-    case 'image': 
-      return <div className={styles.image}>
-        <Image 
-          alt={
-            block.image.caption[0] ?
-              block.image.caption[0].plain_text :
-              "Image has no caption."
-          } 
-          src={getImageSrc(block)} layout="fill"
-        ></Image>
-      </div>
-  }
-
-  return <></>
 }
 
 const PostPage: NextPage<Props> = ({ post, date }) => {
@@ -70,36 +25,67 @@ const PostPage: NextPage<Props> = ({ post, date }) => {
     <Head>
       <title>{post?.title}</title>
       <meta name="description" content={post?.description} />
-      <meta name="keywords" content={`${post?.tags.join(', ')}, blog, liam clegg blog, cleggacus blog, tech blog, tutorials, coding tutorials, portfolio, web developer, software engineer, frontend developer, backend developer, fullstack developer, liam clegg, clegg, liam, liamclegg, cleggacus, programmer, developer, computer science, swansea, london, swansea university`} />
+      <meta name="keywords" content={`${post?.tags}, blog, liam clegg blog, cleggacus blog, tech blog, tutorials, coding tutorials, portfolio, web developer, software engineer, frontend developer, backend developer, fullstack developer, liam clegg, clegg, liam, liamclegg, cleggacus, programmer, developer, computer science, swansea, london, swansea university`} />
 
       <meta name="twitter:card" content="summary"/>
       <meta name="twitter:title" content={post?.title} />
       <meta name="twitter:description" content={post?.description} />
-      <meta name="twitter:image" content={post?.thumbnail} />
+      <meta name="twitter:image" content={post?.cover_image} />
 
       <meta property="og:title" content={post?.title} />
       <meta property="og:description" content={post?.description} />
-      <meta property="og:image" content={post?.thumbnail} />
+      <meta property="og:image" content={post?.cover_image} />
       <meta property="og:url" content={`https://liamclegg.co.uk/blog/post/${post?.id}`} />
     </Head>
 
     <div className={styles.content}>
       <div className={styles.info} >
-        <p>{post ? getLongDate(post.created) : ""}</p>
+        <p>{post ? getLongDate(post.published_at) : ""}</p>
         <h1>{post?.title}</h1>
+        <div className={styles.tags}>
+            {
+              post?.tag_list.map((tag, i) => (
+                <div key={i} className={`${styles.tag}`} style={{
+                    backgroundColor: tag.bg_color_hex,
+                    color: tag.text_color_hex,
+                }}><p>{tag.name}</p></div>
+              ))
+            }
+        </div>
       </div>
 
       <div className={styles.thumbnail} >
-        <Image alt="Blog post cover image." className={styles.image} src={post?.thumbnail || ""} layout="fill"></Image>
+        <Image alt="Blog post cover image." className={styles.image} src={post?.cover_image || ""} layout="fill"></Image>
       </div>
 
       <div className={styles.main}>
-        {
-          (post?.blocks) ?
-            post.blocks.map(block => renderBlock(block)) :
-            <></>
-        }
+         <ReactMarkdown
+            components={{
+              code({node, inline, className, children, ...props}) {
+                const match = /language-(\w+)/.exec(className || '')
+                return !inline && match ? (
+                <Box className={styles.code}>
+                  <SyntaxHighlighter
+                    {...props}
+                    style={theme}
+                    language={match[1]}
+                    pre="div"
+                  >
+                    { String(children).replace(/\n$/, '') }
+                  </SyntaxHighlighter>
+                </Box>
+                ) : (
+                  <code {...props} className={className}>
+                    {children}
+                  </code>
+                )
+              }
+            }}
+         >
+            {post?.body_markdown ?? ""}
+         </ReactMarkdown>
       </div>
+
     </div>
   </div>
 }
@@ -133,7 +119,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
      paths: res.map(el => { 
        return {
          params: { 
-           id: el.id
+           id: el.id.toString()
          }
        }
      }),

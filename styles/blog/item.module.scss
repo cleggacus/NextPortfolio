@@ -1,14 +1,3 @@
-$tagDefault: #ababab;
-$tagGray: #626262;
-$tagBrown: #815b3a;
-$tagOrange: #e7864e;
-$tagYellow: #c3ac3e;
-$tagGreen: #66bd64;
-$tagBlue: #5a9db7;
-$tagPurple: #9c76ce;
-$tagPink: #cd5e87;
-$tagRed: #c55454;
-
 .container:hover {
   box-shadow: 20px 20px var(--fg-1) !important;
   transform: translate(-10px, -10px);
@@ -73,17 +62,6 @@ $tagRed: #c55454;
       width: 100%;
       float: left;
 
-      .tag.default { background-color: $tagDefault; }
-      .tag.gray { background-color: $tagGray; }
-      .tag.brown { background-color: $tagBrown; }
-      .tag.orange { background-color: $tagOrange; }
-      .tag.yellow { background-color: $tagYellow; }
-      .tag.green { background-color: $tagGreen; }
-      .tag.blue { background-color: $tagBlue; }
-      .tag.purple { background-color: $tagPurple; }
-      .tag.pink { background-color: $tagPink; }
-      .tag.red { background-color: $tagRed; }
-
       .tag {
         float: left;
         width: fit-content;
@@ -94,7 +72,6 @@ $tagRed: #c55454;
           display: relative;
           margin: 0;
           font-weight: normal;
-          color: #fff;
         }
       }
     }

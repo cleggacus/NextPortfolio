@@ -15,19 +15,22 @@ const BlogItem: FC<Props> = ({ post }) => {
     <Box className={styles.container}>
       <div className={styles.content}>
         <div className={styles.thumbnail}>
-          <Image alt="blog post cover image." layout="fill" className={styles.image} src={post.thumbnail}></Image>
+          <Image alt="blog post cover image." layout="fill" className={styles.image} src={post.cover_image}></Image>
         </div>
 
         <div className={styles.info}>
-          <p className={styles.date}>{getLongDate(post.created)}</p>
+          <p className={styles.date}>{getLongDate(post.published_at)}</p>
           <h2>{post.title}</h2>
           <p>{post.description}</p>
 
 
           <div className={styles.tags}>
             {
-              post.tags.map((tag, i) => (
-                <div key={i} className={`${styles.tag} ${styles[tag.color]}`}><p>{tag.name}</p></div>
+              post.tag_list.map((tag, i) => (
+                <div key={i} className={`${styles.tag}`} style={{
+                    backgroundColor: tag.bg_color_hex,
+                    color: tag.text_color_hex,
+                }}><p>{tag.name}</p></div>
               ))
             }
           </div>

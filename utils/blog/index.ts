@@ -1,4 +1,3 @@
-import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import getPost from "./getPost";
 import getPosts from "./getPosts";
 
@@ -7,15 +6,20 @@ export {
   getPosts
 };
 
+export type Tag = {
+    id: number,
+    name: string,
+    bg_color_hex: string,
+    text_color_hex: string,
+}
+
 export type Post = {
-  id: string,
-  title: string,
-  description: string,
-  created: string,
-  thumbnail: string,
-  tags: {
-    color: string,
-    name: string
-  }[],
-  blocks?: BlockObjectResponse[]
+    id: number,
+    title: string,
+    description: string,
+    published_at: string,
+    cover_image: string,
+    tag_list: Tag[],
+    tags: string,
+    body_markdown: string | undefined
 }

@@ -18,8 +18,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "declaration": true,
+    "declarationDir": "./types"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tsconfig.server.json"],
+  "include": ["types.d.ts", "next-env.d.ts", "**/*.ts", "**/*.tsx", "tsconfig.server.json"],
   "exclude": ["node_modules"]
 }

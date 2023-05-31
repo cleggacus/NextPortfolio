@@ -18,10 +18,10 @@ const Section2: FC<SectionProps> = (props) => {
 const Card1 = () => {
   return <div className={styles.cardOuter}>
     <Box className={styles.card}>
-      <h1>WEB DEV</h1>
+      <h1>Frontend</h1>
 
       <div>
-        <p>Im a fullstack web developer with experience in NodeJS, TypeScript, React/NextJS, Express, MongoDB, SQL, CSS/SCSS and HTML.</p>
+        <p>When it comes to frontend I have experience in JavaScript, TypeScript, React & NextJS, SolidJS, SQL (MySQL & Postgres), CSS/SCSS and HTML.</p>
       </div>
     </Box>
   </div>
@@ -30,10 +30,10 @@ const Card1 = () => {
 const Card2 = () => {
   return <div className={styles.cardOuter}>
     <Box className={styles.card}>
-      <h1>OTHER DEV</h1>
+      <h1>Backend</h1>
 
       <div>
-        <p>Outside of web development I can program in C++ (11), C, Java, JavaScript and Python.<br/><br/>I am quick at learning new things and using prior knowledge in different situations.</p>
+        <p>When it comes to backend I can program in Rust, JavaScipt, TypeScript, Java, C++ and GO (currenlty learning). I can use ExpressJS, ActixWeb and GraphQL (Apollo & Juniper)</p>
       </div>
     </Box>
   </div>
@@ -42,15 +42,15 @@ const Card2 = () => {
 const Card3 = () => {
   return <div className={styles.cardOuter}>
     <Box className={styles.card}>
-      <h1>ALGORITHMS</h1>
+      <h1>Projects</h1>
 
       <div>
-        <p>I have experience coding a variety of algorithms such as path findeing, map generation, sorting, searching and neural networks. In the background is map generated with perlin noise and A* path finder.</p>
+        <p>This website (the background on this site is astar and perlin noise). Notion style editor made with NextJS, Rust Juniper Backend and PostgreSQL database. JSON Parser in C. A Paste bin made with NextJS and TRPC. More on my GitHub.</p>
       </div>
 
-      {/* <Link href="/algorithms">
-        <Button noShadow>VIEW SOME HERE</Button>
-      </Link> */}
+      <Link href="https://github.com/cleggacus">
+        <Button>GitHub</Button>
+      </Link>
     </Box>
   </div>
 }

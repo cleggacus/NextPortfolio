@@ -33,15 +33,15 @@ const Blog: NextPage<Props> = ({ posts, date }) => {
   </div>
 }
 export const getStaticProps: GetStaticProps<{}> = async () => {
-  const results = await getPosts() || [];
+    const results = await getPosts() || [];
 
-  return {
-    props: {
-      posts: results,
-      date: Date.now()
-    },
-    revalidate: 10 
-  }
+    return {
+        props: {
+            posts: results,
+            date: Date.now()
+        },
+        revalidate: 10 
+    }
 }
 
 export default Blog;
